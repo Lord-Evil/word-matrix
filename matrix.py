@@ -130,7 +130,7 @@ class Matrix:
                     (self.alphabetSize - 1) * self.alphabetSize)
         self.cellSize = math.ceil(cells.bit_length() / 8)
         self.matrixSizeBytes = int(cells * self.cellSize)
-        self.log("Creating Matrix %s cells - %s bytes (%f MB)" % ("{:,}".format(cells), "{:,}".format(
+        self.log("Creating Matrix %s cells - %s bytes (%s MB)" % ("{:,}".format(cells), "{:,}".format(
             self.matrixSizeBytes), "{:,}".format(int(self.matrixSizeBytes / 1024 / 1024))))
         try:
             fw = open(self.brainName + ".matrix", "+xb")
