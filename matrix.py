@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import sys
 import math
 
@@ -269,16 +269,18 @@ class Matrix:
             print("Bad add %d" % address)
             quit()
 
-    def train(self, word, value):
+    def train(self, word, value, disableCache=False):
         address = self.getAddress(word)
         value = value.to_bytes(self.cellSize, "big")
         if(self._cache):
-            self._cache = 0
+            if disableCache:
+                self._cache = 0
             self.write(address, value)
             if(value != b'\0' * self.cellSize):
                 if(address not in self._useAddresses):
                     self._useAddresses.add(address)
-            self._cache = 1
+            if disableCache:
+                self._cache = 1
         else:
             self.write(address, value)
 
@@ -290,7 +292,7 @@ class Matrix:
                 break
             rline = line.rstrip().split(" ")
             # print(line)
-            self.train(rline[0], int(rline[1]))
+            self.train(rline[0], int(rline[1]), True)
         if(self._cache):
             self.updateCache()
 
